@@ -1,3 +1,7 @@
+# RandomUsername (Nikola Jovanovic)
+# AdventOfCode
+# Day 6
+
 import sys
 import re
 import time
