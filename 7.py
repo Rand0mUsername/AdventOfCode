@@ -14,11 +14,6 @@ start_time = time.time()
 in_file = open("7.in")
 lines = in_file.readlines()
 
-# Possible data stucture approaches:
-# 1. Use four dictionaries for edges, indegree, values, and production rules
-# 2. Create a class Node and use one dictionary which maps id to an index in a list of nodes
-# I decided to use 1, what's good practice?
-
 # vars
 identifier = re.compile(r"^[a-z]*$") 
 edges = dict()
@@ -57,7 +52,7 @@ def calcValue(key, part):
 		vals[key] = getVal(prod[0]) >> getVal(prod[2])
 	elif prod[1] == 'LSHIFT':
 		vals[key] = getVal(prod[0]) << getVal(prod[2])
-	# 16 bit numbers, truncate (still works without this line though, no idea how)
+	# 16 bit numbers, truncate (still works without this line though, no idea how not and shifts work ?!)
 	vals[key] &= 0xFFFF
 
 # topological sorting
