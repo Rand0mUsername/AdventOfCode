@@ -32,22 +32,21 @@ for i in range(0, 8):
 
 # the number of masks
 MASKS = 1 << 8
-# iterate over the number of set bits
-for i in range(3, 9): 
-	for MASK in range(0, MASKS): 
-		if bin(MASK).count("1") == i: 
-			# process all bitmasks with i set bits
-			# remove 'bit'
-			for bit in range(0, 8):
-				if MASK & (1 << bit):
-					nMASK = MASK - (1 << bit)
-					for nBit in range(0, 8):
-						if nMASK & (1 << nBit):
-						# make a nBit -> bit transition and update DP[MASK][bit]
-							newDist = DP[nMASK][nBit][0] + DP[(1<<bit) | (1<<nBit)][bit][0]
-							DP[MASK][bit][0] = min(newDist, DP[MASK][bit][0])
-							newDist = DP[nMASK][nBit][1] + DP[(1<<bit) | (1<<nBit)][bit][1]
-							DP[MASK][bit][1] = max(newDist, DP[MASK][bit][1])
+# process all bitmasks
+# bitmasks with N bits set depend on bitmasks with N-1 bits set created by clearing a single bit
+# we could iterate over N and then over MASK but it's not needed since the natural order is a valid toposort
+for MASK in range(0, MASKS): 
+	# let's remove 'bit'
+	for bit in range(0, 8):
+		if MASK & (1 << bit):
+			nMASK = MASK - (1 << bit)
+			for nBit in range(0, 8):
+				if nMASK & (1 << nBit):
+				# make a nBit -> bit transition and update DP[MASK][bit]
+					newDist = DP[nMASK][nBit][0] + DP[(1<<bit) | (1<<nBit)][bit][0]
+					DP[MASK][bit][0] = min(newDist, DP[MASK][bit][0])
+					newDist = DP[nMASK][nBit][1] + DP[(1<<bit) | (1<<nBit)][bit][1]
+					DP[MASK][bit][1] = max(newDist, DP[MASK][bit][1])
 
 
 # find the answer, best among DP[MASKS-1][]
