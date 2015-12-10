@@ -12,9 +12,9 @@ start_time = time.time()
 # my puzzle input
 s = "1321131112"
 
-# i felt like doing a one liner
+# I felt like doing a one liner
 def transform(s):
-	return "".join(map(lambda tpl: str(len(tpl[0])) + tpl[1], re.findall(r"(([0-9])\2*)", s)))
+	return "".join(map(lambda tpl: str(len(tpl[0])) + tpl[1], re.findall(r"((\d)\2*)", s)))
 
 # repeat the transformation 40 times for part A, and 50 times for part B
 for i in range(50):
