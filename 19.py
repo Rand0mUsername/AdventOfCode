@@ -47,7 +47,7 @@ ret2 = len(re.findall(r"[A-Z]", s)) - 1 - s.count("Rn") - s.count("Ar") - 2 * s.
 
 # fetch and print the output
 print("Solution: ", ret1, ret2)
-# 0 0
+# 518 200
 
 # execution time
 print("Execution time: %.2f seconds" % (time.time() - start_time))
